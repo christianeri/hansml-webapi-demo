@@ -48,8 +48,12 @@ const UserProvider = ({children}:IUserContextProps) => {
                     'Content-Type': 'application/json'
                }, body: JSON.stringify(userRequest)
           })
-          if (result.status === 201) 
-          setUserRequest(userRequestDefault)
+          if (result.status === 201) {
+               setUserRequest(userRequestDefault)
+               const newUser = await result.json()
+               setUsers(oldUsers => [...oldUsers, newUser])
+
+          }
      }
 
      const get = async (id:number) => {
